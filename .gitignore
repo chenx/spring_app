@@ -1,0 +1,7 @@
+README
+
+backend_java/target
+backend_rust/target
+
+.env
+**/.env
