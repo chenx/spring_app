@@ -1,0 +1,36 @@
+.user-container {
+  padding: 20px;
+}
+
+::ng-deep .mat-mdc-card-header-text {
+  width: 100%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-header button {
+  margin-left: auto;
+}
+
+.users-table {
+  width: 100%;
+}
+
+.stripe {
+  background-color: #fafafa;
+}
+
+.role-admin {
+  background-color: #fef0f0 !important;
+  color: #f56c6c !important;
+}
+
+.role-user {
+  background-color: #f4f4f5 !important;
+  color: #909399 !important;
+}

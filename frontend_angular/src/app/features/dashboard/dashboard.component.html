@@ -1,0 +1,72 @@
+<div class="home-container">
+  <div class="row">
+    <div class="col">
+      <mat-card appearance="raised">
+        <mat-card-header>
+          <mat-card-title class="card-header">
+            <mat-icon inline style="font-size: 28px; width: 28px; height: 28px;">dvr</mat-icon>
+            <span>Welcome to your Dashboard</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">
+            This is a full-stack demo project built with {{ healthData?.sysinfo }} backend
+            and Angular 21.2.20 + TypeScript + Element Plus frontend.
+          </p>
+          <mat-divider></mat-divider>
+          <table class="tech-table">
+            <caption>Tech Stack</caption>
+            <tbody>
+              <tr>
+                <th>Backend</th><td colspan="3">{{ healthData?.sysinfo }}</td>
+                <!-- <th>Java Version</th><td>21</td> -->
+              </tr>
+              <tr>
+                <th>Frontend</th><td>Anguar 21.2.20</td>
+                <th>UI Library</th><td>Element Plus 2.7</td>
+              </tr>
+              <tr>
+                <th>Language</th><td>TypeScript 5.4</td>
+                <th>Build Tool</th><td>Vite 5.2</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="raised" style="margin-top: 20px">
+        <mat-card-header>
+          <mat-card-title class="card-header">
+            <mat-icon inline style="font-size: 28px; width: 28px; height: 28px;">cable</mat-icon>
+            <span>Backend Health Status</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="loading" style="text-align: center">
+            <mat-spinner diameter="32" style="margin: 0 auto"></mat-spinner>
+            <p>Checking backend status...</p>
+          </div>
+
+          <div *ngIf="!loading && healthData" class="result" [class.result-success]="healthData.status === 'UP'" [class.result-error]="healthData.status !== 'UP'">
+            <mat-icon class="result-icon">{{ healthData.status === 'UP' ? 'check_circle' : 'cancel' }}</mat-icon>
+            <h3>{{ healthData.status === 'UP' ? 'Backend is running' : 'Backend is down' }}</h3>
+            <p>Service: {{ healthData.service }} | Timestamp: {{ healthData.timestamp }}</p>
+          </div>
+
+          <div *ngIf="!loading && !healthData" class="result result-warning">
+            <mat-icon class="result-icon">warning</mat-icon>
+            <h3>Cannot connect to backend</h3>
+            <p>Make sure the Spring Boot server is running on port 8080</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 10px">
+            <button mat-raised-button color="primary" (click)="checkHealth()" [disabled]="loading">
+              <mat-icon>refresh</mat-icon>
+              Refresh Status
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

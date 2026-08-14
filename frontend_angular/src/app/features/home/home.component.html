@@ -1,0 +1,36 @@
+<div class="home-container">
+  <div class="row">
+    <mat-card class="col" appearance="raised">
+      <mat-card-header>
+        <mat-card-title class="card-header">
+          <mat-icon inline style="font-size: 28px; width: 28px; height: 28px;">dvr</mat-icon>
+          <span>Welcome to Spring App</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="description">
+          Full-stack demo project built with {{ healthData?.sysinfo }} backend
+          and Angular 21.2.20 + TypeScript + Element Plus frontend.
+        </p>
+        <mat-divider></mat-divider>
+        <table class="tech-table">
+          <caption>Tech Stack</caption>
+          <tbody>
+            <tr>
+              <th>Backend</th><td colspan="3">{{ healthData?.sysinfo }}</td>
+              <!-- <th>Java Version</th><td>21</td> -->
+            </tr>
+            <tr>
+              <th>Frontend</th><td>Angular 21.2.20</td>
+              <th>UI Library</th><td>Element Plus 2.7</td>
+            </tr>
+            <tr>
+              <th>Language</th><td>TypeScript 5.4</td>
+              <th>Build Tool</th><td>Vite 5.2</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

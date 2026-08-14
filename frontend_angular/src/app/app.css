@@ -1,0 +1,46 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #545c64 !important;
+  color: #fff !important;
+  padding: 0 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-right nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-right nav a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 16px;
+  height: 100%;
+  border-bottom: 3px solid transparent;
+  box-sizing: border-box;
+}
+
+.header-right nav a:hover,
+.header-right nav a.is-active {
+  color: #ffd04b;
+}
+
+.app-main {
+  display: block;
+}

@@ -1,0 +1,36 @@
+<div id="layout">
+  <mat-toolbar class="app-header">
+    <div class="header-left">
+      <mat-icon>dvr</mat-icon>
+      <span class="app-title">Spring</span>
+    </div>
+    <div class="header-right">
+      <nav>
+        <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
+        <a routerLink="/login" routerLinkActive="is-active" *ngIf="!isLoggedIn">
+          <mat-icon>home</mat-icon>
+          Login
+        </a>
+        <a routerLink="/dashboard" routerLinkActive="is-active" *ngIf="isLoggedIn">
+          <mat-icon>person</mat-icon>
+          Dashboard
+        </a>
+        <a routerLink="/users" routerLinkActive="is-active" *ngIf="isLoggedIn">
+          <mat-icon>person</mat-icon>
+          Users
+        </a>
+        <a href="javascript:void(0)" (click)="logout()" *ngIf="isLoggedIn">
+          <mat-icon>person</mat-icon>
+          Log Out
+        </a>
+      </nav>
+    </div>
+  </mat-toolbar>
+
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

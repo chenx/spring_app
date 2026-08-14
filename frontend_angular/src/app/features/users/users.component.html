@@ -1,0 +1,79 @@
+<div class="user-container">
+  <mat-card appearance="raised">
+    <mat-card-header>
+      <mat-card-title class="card-header">
+        <span style="font-size: 18px; font-weight: bold">User Management</span>
+        <button mat-raised-button color="primary" (click)="handleAdd()">
+          <mat-icon>add</mat-icon>
+          Add User
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="users" class="mat-elevation-z1 users-table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Username</th>
+          <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Role</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip [class.role-admin]="row.role === 'ADMIN'" [class.role-user]="row.role !== 'ADMIN'">
+              {{ row.role }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Created At</th>
+          <td mat-cell *matCellDef="let row">{{ formatDate(row.createdAt) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center">Actions</th>
+          <td mat-cell *matCellDef="let row" style="text-align: center">
+            <button
+              mat-button
+              color="primary"
+              [disabled]="isProtected(row.id)"
+              [matTooltip]="isProtected(row.id) ? 'Cannot edit default testing account' : ''"
+              [matTooltipDisabled]="!isProtected(row.id)"
+              (click)="handleEdit(row)"
+            >
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            <button
+              mat-button
+              color="warn"
+              [disabled]="isProtected(row.id)"
+              [matTooltip]="isProtected(row.id) ? 'Cannot delete default testing account' : ''"
+              [matTooltipDisabled]="!isProtected(row.id)"
+              (click)="handleDelete(row)"
+            >
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [class.stripe]="i % 2 === 1"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
