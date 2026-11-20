@@ -1,5 +1,76 @@
 # Security Upgrade: PHP
 
+
+## 11/19/2026
+
+### Security release
+
+https://support.cpanel.net/hc/en-us/articles/45152249350423-Security-Critical-PHP-Security-Release-on-November-18-2026
+
+### Upgrade
+
+```
+$ sudo apt update
+
+$ apt-cache policy php8.5-fpm
+php8.5-fpm:
+  Installed: 8.5.4-0ubuntu1.5
+  Candidate: 8.5.4-0ubuntu1.6
+  Version table:
+     8.5.4-0ubuntu1.6 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu resolute-updates/universe amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/universe amd64 Packages
+ *** 8.5.4-0ubuntu1.5 100
+        100 /var/lib/dpkg/status
+     8.5.4-0ubuntu1 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu resolute/universe amd64 Packages
+
+$ sudo apt install --only-upgrade -y \
+  -o Dpkg::Options::="--force-confold" \
+  $(dpkg -l 'php8.5*' | awk '/^ii/ {print $2}')
+php8.5-igbinary is already the newest version (3.2.16-4ubuntu1).
+php8.5-redis is already the newest version (6.2.0-1ubuntu1).
+Upgrading:                  
+  libapache2-mod-php8.5  php8.5  php8.5-cli  php8.5-common  php8.5-fpm  php8.5-gd  php8.5-mysql  php8.5-phpdbg  php8.5-readline  php8.5-xml
+
+Summary:
+  Upgrading: 10, Installing: 0, Removing: 0, Not Upgrading: 74
+  Download size: 0 B / 13.8 MB
+
+...
+Processing triggers for php8.5-phpdbg (8.5.4-0ubuntu1.6) ...
+Processing triggers for libapache2-mod-php8.5 (8.5.4-0ubuntu1.6) ...
+
+$ sudo systemctl restart php8.5-fpm
+$ sudo systemctl reload apache2
+$ sudo systemctl reload nginx
+$ php -v
+PHP 8.5.4 (cli) (built: Nov 19 2026 00:22:49) (NTS)
+Copyright (c) The PHP Group
+Built by Ubuntu
+Zend Engine v4.5.4, Copyright (c) Zend Technologies
+    with Zend OPcache v8.5.4, Copyright (c), by Zend Technologies
+$ php-fpm8.5 -v
+PHP 8.5.4 (fpm-fcgi) (built: Nov 19 2026 00:22:49) (NTS)
+Copyright (c) The PHP Group
+Built by Ubuntu
+Zend Engine v4.5.4, Copyright (c) Zend Technologies
+    with Zend OPcache v8.5.4, Copyright (c), by Zend Technologies
+$ apt-cache policy php8.5-fpm
+php8.5-fpm:
+  Installed: 8.5.4-0ubuntu1.6
+  Candidate: 8.5.4-0ubuntu1.6
+  Version table:
+ *** 8.5.4-0ubuntu1.6 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu resolute-updates/universe amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/universe amd64 Packages
+        100 /var/lib/dpkg/status
+     8.5.4-0ubuntu1 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu resolute/universe amd64 Packages
+
+```
+
+
 ## 10/21/2026 
 
 ### PHP2Shell vulnerability
